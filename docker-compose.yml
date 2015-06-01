@@ -5,10 +5,10 @@ emmasternode:
     - "9300:9300"
 
 emnode01:
-  image: es_node01
+  image: es_node
 
 emnode02:
-  image: es_node01
+  image: es_node
 
 
 #docker-compose up -d
