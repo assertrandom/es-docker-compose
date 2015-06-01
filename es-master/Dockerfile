@@ -25,16 +25,26 @@ RUN wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1
 
 RUN tar -xzf elasticsearch-1.5.2.tar.gz
 
-EXPOSE 9200
+RUN mv elasticsearch-1.5.2 elasticsearch
 
-EXPOSE 9300
+RUN chmod 777 elasticsearch
+
+EXPOSE 9200 9300 8080
+
+ENV PATH /opt/elasticsearch/bin:$PATH
+
+RUN plugin -i elasticsearch/marvel/latest
+
+RUN plugin -install mobz/elasticsearch-head
 
 ADD run.sh /run.sh
 
-CMD ["/run.sh"]
+RUN chmod 777 /run.sh
+
+CMD ["elasticsearch"]
 
 
 
-# sudo docker build -t es_master .
+#  docker build -t es_master .
 
-# sudo docker run -d -P -p 5432:5432  es_master
+#  docker run -d -P -p 9200:9200 -p 9300:9300  es_master
