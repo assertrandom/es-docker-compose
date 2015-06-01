@@ -1,0 +1,15 @@
+emmasternode:
+  image: es_master
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+
+emnode01:
+  image: es_node01
+
+emnode02:
+  image: es_node01
+
+
+#docker-compose up -d
+#docker-compose kill
