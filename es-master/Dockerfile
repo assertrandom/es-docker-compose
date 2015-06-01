@@ -37,7 +37,13 @@ RUN plugin -i elasticsearch/marvel/latest
 
 RUN plugin -install mobz/elasticsearch-head
 
+VOLUME ["/opt/elasticsearch/data"]
+
 ADD run.sh /run.sh
+
+COPY config/elasticsearch.yml /opt/elasticsearch/config/
+
+COPY config/logging.yml /opt/elasticsearch/config/
 
 RUN chmod 777 /run.sh
 
@@ -48,3 +54,8 @@ CMD ["elasticsearch"]
 #  docker build -t es_master .
 
 #  docker run -d -P -p 9200:9200 -p 9300:9300  es_master
+
+#   docker run -d -P -p 9200:9200 -v /Users/mlk/source/data/docker/es_master/data:/opt/elasticsearch/data -v /Users/mlk/source/data/docker/es_master/config:/opt/elasticsearch/config es_master
+
+
+#   docker run -d -P -p 9200:9200 -v /Users/mlk/source/data/docker/es_master/data:/opt/elasticsearch/data  es_master
